@@ -9,6 +9,12 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 import streamlit as st
 
+try :
+    nltk.data.find('tokenizers/punkt')
+    print("La ressource 'punkt' est déjà présente.")
+except LookupError :
+    print("La ressource 'punkt' n'a pas été trouvée. Téléchargement en cours...")
+    nltk.download('punkt')
 stemmer = FrenchStemmer()
 intents = json.loads(open('data/intents.json', encoding = 'utf-8').read())
 words = pickle.load(open('data/words.pkl', 'rb'))
